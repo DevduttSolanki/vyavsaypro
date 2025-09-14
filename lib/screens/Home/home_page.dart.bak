@@ -1,0 +1,647 @@
+// import 'package:flutter/material.dart';
+// import '../../widgets/app_drawer.dart';
+//
+// class HomePage extends StatefulWidget {
+//   @override
+//   _HomePageState createState() => _HomePageState();
+// }
+//
+// class _HomePageState extends State<HomePage> {
+//   int _selectedIndex = 0;
+//
+//   void _onItemTapped(int index) {
+//     setState(() {
+//       _selectedIndex = index;
+//     });
+//
+//     switch (index) {
+//       case 0:
+//         Navigator.pushNamed(context, '/inventory');
+//         break;
+//       case 1:
+//         Navigator.pushNamed(context, '/staff_list');
+//         break;
+//       case 2:
+//         Navigator.pushNamed(context, '/ledger_list');
+//         break;
+//       case 3:
+//         Navigator.pushNamed(context, '/profile');
+//         break;
+//     }
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Vyavsay Pro"),
+//         backgroundColor: Colors.blue,
+//         actions: [
+//           IconButton(
+//             icon: Icon(Icons.notifications),
+//             onPressed: () {
+//               Navigator.pushNamed(context, '/notify');
+//             },
+//           )
+//         ],
+//       ),
+//
+//       drawer: AppDrawer(
+//         businessName: "Vyavsay Pro", // Replace with Firestore value
+//         ownerImageUrl: "https://your-storage-link.com/profile.jpg", // Replace dynamically later
+//       ),
+//
+//       body: SingleChildScrollView(
+//         padding: EdgeInsets.all(16),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//
+//             // 🔹 Business Info
+//             Card(
+//               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//               elevation: 3,
+//               child: ListTile(
+//                 leading: CircleAvatar(
+//                   backgroundImage: NetworkImage("https://your-storage-link.com/logo.png"), // Replace dynamically
+//                   radius: 30,
+//                 ),
+//                 title: Text("Vyavsay Pro Pvt. Ltd.", style: TextStyle(fontWeight: FontWeight.bold)),
+//                 subtitle: Text("GST Registered\nGSTIN: 22AAAAA0000A1Z5"),
+//               ),
+//             ),
+//
+//             SizedBox(height: 20),
+//
+//             // 🔹 Quick Stats
+//             Text("Quick Stats", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//             SizedBox(height: 10),
+//             GridView.count(
+//               shrinkWrap: true,
+//               crossAxisCount: 2,
+//               crossAxisSpacing: 12,
+//               mainAxisSpacing: 12,
+//               physics: NeverScrollableScrollPhysics(),
+//               children: [
+//                 _buildStatCard("Today's Sales", "₹12,000", Icons.attach_money, Colors.green),
+//                 _buildStatCard("Purchases", "₹5,000", Icons.shopping_cart, Colors.blue),
+//                 _buildStatCard("Expenses", "₹2,000", Icons.money_off, Colors.red),
+//                 _buildStatCard("Low Stock", "3 Items", Icons.inventory, Colors.orange),
+//               ],
+//             ),
+//
+//             SizedBox(height: 20),
+//
+//             // 🔹 Recent Activity
+//             Text("Recent Activity", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//             SizedBox(height: 10),
+//             Card(
+//               child: ListTile(
+//                 leading: Icon(Icons.receipt, color: Colors.blue),
+//                 title: Text("Invoice #INV-001"),
+//                 subtitle: Text("₹5,500 • Sent to Customer A"),
+//                 trailing: Text("Today"),
+//               ),
+//             ),
+//             Card(
+//               child: ListTile(
+//                 leading: Icon(Icons.shopping_bag, color: Colors.green),
+//                 title: Text("Purchase Order #PO-021"),
+//                 subtitle: Text("₹12,000 • Supplier X"),
+//                 trailing: Text("Yesterday"),
+//               ),
+//             ),
+//             Card(
+//               child: ListTile(
+//                 leading: Icon(Icons.money_off, color: Colors.red),
+//                 title: Text("Expense Added"),
+//                 subtitle: Text("₹1,200 • Utilities"),
+//                 trailing: Text("2 days ago"),
+//               ),
+//             ),
+//
+//             SizedBox(height: 20),
+//
+//             // 🔹 Quick Actions
+//             Text("Quick Actions", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//             SizedBox(height: 10),
+//             Wrap(
+//               spacing: 12,
+//               runSpacing: 12,
+//               children: [
+//                 _buildActionButton(Icons.add, "Create Invoice", Colors.blue, () {
+//                   Navigator.pushNamed(context, '/create_invoice');
+//                 }),
+//
+//                 _buildActionButton(Icons.inventory_2, "Add Product", Colors.orange, () {
+//                   Navigator.pushNamed(context, '/add_edit_product');
+//                 }),
+//                 _buildActionButton(Icons.money, "Add Income", Colors.greenAccent, () {
+//                   Navigator.pushNamed(context, '/income');
+//                 }),
+//                 _buildActionButton(Icons.money, "Add Expense", Colors.red, () {
+//                   Navigator.pushNamed(context, '/expenses');
+//                 }),
+//
+//               ],
+//             ),
+//
+//           ],
+//         ),
+//       ),
+//
+//       bottomNavigationBar: BottomNavigationBar(
+//         type: BottomNavigationBarType.fixed,
+//         currentIndex: _selectedIndex,
+//         backgroundColor: Colors.blue,
+//         onTap: _onItemTapped,
+//         items: [
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.inventory),
+//             label: 'Inventory',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.group),
+//             label: 'Staff',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.account_balance_wallet),
+//             label: 'Ledger',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.person),
+//             label: 'Profile',
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+//
+//   // 🔹 Helper for Stats Card
+//   Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+//     return Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//       elevation: 3,
+//       child: Padding(
+//         padding: EdgeInsets.all(16),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Icon(icon, size: 32, color: color),
+//             SizedBox(height: 10),
+//             Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//             SizedBox(height: 5),
+//             Text(title, style: TextStyle(color: Colors.grey[600])),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   // 🔹 Helper for Quick Action Buttons
+//   Widget _buildActionButton(IconData icon, String label, Color color, VoidCallback onPressed) {
+//     return ElevatedButton.icon(
+//       style: ElevatedButton.styleFrom(
+//         backgroundColor: color,
+//         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//       ),
+//       onPressed: onPressed,
+//       icon: Icon(icon, color: Colors.white),
+//       label: Text(label, style: TextStyle(color: Colors.white)),
+//     );
+//   }
+// }
+
+//===============================================================Task 2
+
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../widgets/app_drawer.dart';
+import '../../widgets/gradient_app_bar.dart';
+import '../../widgets/stock_movement_list.dart';
+import '../../mixins/profile_check_mixin.dart';
+import '../../services/profile_service.dart';
+import '../../models/business_model.dart';
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with ProfileCheckMixin {
+  int _selectedIndex = 0;
+  String? _businessId;
+  bool _isLoading = true;
+  final ProfileService _profileService = ProfileService();
+  BusinessModel? _businessData;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadBusinessData();
+  }
+
+  Future<void> _loadBusinessData() async {
+    try {
+      setState(() => _isLoading = true);
+      final business = await _profileService.getUserBusiness();
+      
+      setState(() {
+        _businessData = business;
+        _businessId = business?.businessId;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error loading business data: $e');
+      setState(() => _isLoading = false);
+    }
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    // Handle navigation with profile checks
+    switch (index) {
+      case 0: // Inventory
+        checkProfileAndNavigate('/inventory');
+        break;
+      case 1: // Staff
+        checkProfileAndNavigate('/staff_list');
+        break;
+      case 2: // Ledger
+        checkProfileAndNavigate('/ledger_list');
+        break;
+      case 3: // Profile - Always allow access
+        Navigator.pushNamed(context, '/profile');
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: GradientAppBar(
+        title: "Vyavsay Pro",
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              checkProfileAndNavigate('/notify');
+            },
+          )
+        ],
+      ),
+
+      drawer: AppDrawer(
+        businessName: _isLoading 
+          ? "Loading..." 
+          : (_businessData?.businessName ?? "Complete your profile"),
+        ownerImageUrl: "https://via.placeholder.com/150",  // Default placeholder image
+      ),
+
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Business Info
+            Builder(
+              builder: (context) {
+                String businessName = "Loading...";
+                String businessInfo = "Loading business information...";
+                
+                if (!_isLoading && _businessData != null) {
+                  businessName = _businessData!.businessName;
+                  businessInfo = _businessData!.defaultTaxType == 'GST'
+                    ? "GST Registered\nGSTIN: ${_businessData!.gstin ?? 'Not provided'}"
+                    : _businessData!.defaultTaxType;
+                } else if (!_isLoading) {
+                  businessName = "Business Profile Required";
+                  businessInfo = "Please complete your business profile";
+                }
+                
+                return Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  elevation: 3,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                      radius: 30,
+                      child: Icon(Icons.business, color: Theme.of(context).primaryColor),
+                    ),
+                    title: Text(businessName, style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(businessInfo),
+                  ),
+                );
+              },
+            ),
+
+            SizedBox(height: 20),
+
+            // Inventory Overview
+            Text("Inventory Overview", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: 10),
+            if (_isLoading)
+              Center(child: CircularProgressIndicator())
+            else if (_businessId == null)
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Unable to load inventory data",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: _loadBusinessData,
+                      child: Text("Retry"),
+                    ),
+                  ],
+                ),
+              )
+            else
+            StreamBuilder(
+              stream: FirebaseFirestore.instance
+                .collection('products')
+                .where('business_id', isEqualTo: _businessId)
+                .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                if (snapshot.hasError) {
+                  return Text("Error loading inventory data");
+                }
+
+                final products = snapshot.data?.docs ?? [];
+                int totalProducts = products.length;
+                int lowStockItems = products.where((doc) {
+                  final data = doc.data() as Map<String, dynamic>;
+                  final quantity = data['quantity'] as int? ?? 0;
+                  final lowStockThreshold = data['low_stock_threshold'] as int? ?? 0;
+                  return quantity <= lowStockThreshold && lowStockThreshold > 0;
+                }).length;
+
+                double totalValue = products.fold(0, (sum, doc) {
+                  final data = doc.data() as Map<String, dynamic>;
+                  return sum + ((data['quantity'] ?? 0) * (data['price'] ?? 0));
+                });
+
+                return GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    _buildStatCard("Total Products", "$totalProducts", Icons.category, Colors.blue),
+                    _buildStatCard("Low Stock Items", "$lowStockItems", Icons.warning_amber, Colors.orange),
+                    _buildStatCard("Stock Value", "₹${totalValue.toStringAsFixed(2)}", Icons.monetization_on, Colors.green),
+                    FutureBuilder<int>(
+                      future: _getCategoryCount(),
+                      builder: (context, snapshot) {
+                        final count = snapshot.data ?? 0;
+                        return _buildStatCard("Categories", "$count", Icons.folder, Colors.purple);
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
+
+            SizedBox(height: 20),
+
+            // Recent Stock Activities
+            Text("Recent Stock Activities", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: 10),
+            StockMovementList(businessId: _businessId),
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                if (snapshot.hasError) {
+                  print('Stock movements error: ${snapshot.error}');
+                  return Text("Error loading stock movements");
+                }
+
+                final movements = snapshot.data?.docs ?? [];
+
+                if (movements.isEmpty) {
+                  return Card(
+                    child: ListTile(
+                      leading: Icon(Icons.info, color: Colors.grey),
+                      title: Text("No Recent Activities"),
+                      subtitle: Text("Stock movements will appear here"),
+                    ),
+                  );
+                }
+
+                return Column(
+                  children: movements.map((doc) {
+                    final data = doc.data() as Map<String, dynamic>;
+                    final type = data['type'] ?? '';
+                    final qty = data['qty'] ?? 0;
+                    
+                    // Get product ID and look up product name
+                    final productId = data['product_id'] as String?;
+                    
+                    return StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('products')
+                          .doc(productId)
+                          .snapshots(),
+                      builder: (context, AsyncSnapshot<DocumentSnapshot> productSnapshot) {
+                        String productName = 'Loading...';
+                        if (productSnapshot.hasData && productSnapshot.data!.exists) {
+                          final productData = productSnapshot.data!.data() as Map<String, dynamic>;
+                          productName = productData['name'] ?? 'Unknown Product';
+                        } else if (productSnapshot.hasError) {
+                          productName = 'Unknown Product';
+                        }
+                        
+                        final timestamp = (data['created_at'] as Timestamp).toDate();
+
+                    IconData icon;
+                    Color color;
+                    String title;
+                    String subtitle;
+
+                    switch (type.toLowerCase()) {
+                      case 'addition':
+                        icon = Icons.add_circle;
+                        color = Colors.green;
+                        title = "Stock Added";
+                        subtitle = "+$quantity • $productName";
+                        break;
+                      case 'reduction':
+                        icon = Icons.remove_circle;
+                        color = Colors.red;
+                        title = "Stock Reduced";
+                        subtitle = "-$quantity • $productName";
+                        break;
+                      default:
+                        icon = Icons.swap_horiz;
+                        color = Colors.blue;
+                        title = "Stock Adjusted";
+                        subtitle = "$quantity • $productName";
+                    }
+
+                    return Card(
+                      child: ListTile(
+                        leading: Icon(icon, color: color),
+                        title: Text(title),
+                        subtitle: Text(subtitle),
+                        trailing: Text(_getTimeAgo(timestamp)),
+                      ),
+                    );
+                  }).toList(),
+                );
+              },
+            ),
+
+            SizedBox(height: 20),
+
+            // Quick Actions
+            Text("Quick Actions", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: 10),
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: [
+                _buildActionButton(Icons.add, "Create Invoice", Colors.blue, () {
+                  checkProfileAndNavigate('/create_invoice');
+                }),
+
+                _buildActionButton(Icons.inventory_2, "Add Product", Colors.orange, () {
+                  checkProfileAndNavigate('/add_edit_product');
+                }),
+
+                _buildActionButton(Icons.money, "Add Income", Colors.greenAccent, () {
+                  checkProfileAndNavigate('/income');
+                }),
+
+                _buildActionButton(Icons.money, "Add Expense", Colors.red, () {
+                  checkProfileAndNavigate('/expenses');
+                }),
+
+                // Chatbot button - Always accessible
+                _buildActionButton(Icons.chat, "Chatbot", Colors.purple, () {
+                  // Navigate to chatbot without profile check
+                  Navigator.pushNamed(context, '/chatbot');
+                }),
+              ],
+            ),
+          ],
+        ),
+      ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        backgroundColor: Color(0xFF8E2DE2),
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.inventory),
+            label: 'Inventory',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.group),
+            label: 'Staff',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_balance_wallet),
+            label: 'Ledger',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper for Stats Card
+  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 3,
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 32, color: color),
+            SizedBox(height: 10),
+            Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: 5),
+            Text(title, style: TextStyle(color: Colors.grey[600])),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Helper for Quick Action Buttons
+  Widget _buildActionButton(IconData icon, String label, Color color, VoidCallback onPressed) {
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+      onPressed: onPressed,
+      icon: Icon(icon, color: Colors.white),
+      label: Text(label, style: TextStyle(color: Colors.white)),
+    );
+  }
+
+  // Helper to get category count
+  Future<int> _getCategoryCount() async {
+    if (_businessId == null) return 0;
+    
+    try {
+      // First get all products for this business
+      final productsSnapshot = await FirebaseFirestore.instance
+          .collection('products')
+          .where('business_id', isEqualTo: _businessId)
+          .get();
+      
+      // Get unique category IDs from products
+      final Set<String> uniqueCategoryIds = productsSnapshot.docs
+          .map((doc) => (doc.data()['category_id'] as String?) ?? '')
+          .where((id) => id.isNotEmpty)
+          .toSet();
+      
+      return uniqueCategoryIds.length;
+    } catch (e) {
+      print('Error getting category count: $e');
+      return 0;
+    }
+  }
+
+  // Helper to format timestamp to relative time
+  String _getTimeAgo(DateTime dateTime) {
+    final now = DateTime.now();
+    final difference = now.difference(dateTime);
+
+    if (difference.inDays > 0) {
+      return '${difference.inDays}d ago';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours}h ago';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes}m ago';
+    } else {
+      return 'Just now';
+    }
+  }
+}

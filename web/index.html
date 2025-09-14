@@ -1,0 +1,114 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--  <base href="$FLUTTER_BASE_HREF">-->
+
+<!--  <meta charset="UTF-8">-->
+<!--  <meta content="IE=Edge" http-equiv="X-UA-Compatible">-->
+<!--  <meta name="description" content="A new Flutter project.">-->
+
+<!--  &lt;!&ndash; iOS meta tags & icons &ndash;&gt;-->
+<!--  <meta name="mobile-web-app-capable" content="yes">-->
+<!--  <meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+<!--  <meta name="apple-mobile-web-app-title" content="vyavsaypro">-->
+<!--  <link rel="apple-touch-icon" href="icons/Icon-192.png">-->
+
+<!--  &lt;!&ndash; Favicon &ndash;&gt;-->
+<!--  <link rel="icon" type="image/png" href="favicon.png"/>-->
+
+<!--  <title>vyavsaypro</title>-->
+<!--  <link rel="manifest" href="manifest.json">-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash; ✅ reCAPTCHA container &ndash;&gt;-->
+<!--<div id="recaptcha-container"></div>-->
+
+<!--&lt;!&ndash; Flutter bootstrap &ndash;&gt;-->
+<!--<script src="flutter_bootstrap.js" async></script>-->
+
+<!--&lt;!&ndash; ✅ Firebase SDKs (compat versions for FlutterFire) &ndash;&gt;-->
+<!--<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>-->
+<!--<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>-->
+<!--<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>-->
+
+<!--&lt;!&ndash; ✅ Initialize Firebase &ndash;&gt;-->
+<!--<script>-->
+<!--  const firebaseConfig = {-->
+<!--    apiKey: "AIzaSyBNNQtoNAuOK7OknmFgf20Ia85TwtmbugU",-->
+<!--    authDomain: "vyavsaypro-database.firebaseapp.com",-->
+<!--    projectId: "vyavsaypro-database",-->
+<!--    storageBucket: "vyavsaypro-database.appspot.com",-->
+<!--    messagingSenderId: "777188366729",-->
+<!--    appId: "1:777188366729:web:9dd9636eb57e08ed442958",-->
+<!--    measurementId: "G-9ZJYBZR4Q8"-->
+<!--  };-->
+<!--</script>-->
+
+<!--</body>-->
+
+<!--</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- Web & iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="vyavsaypro">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>vyavsaypro</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+  
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="main.dart.js" defer></script>
+  <script src="flutter.js" defer></script>
+</head>
+<body>
+  <!-- reCAPTCHA container -->
+  <div id="recaptcha-container"></div>
+
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNNQtoNAuOK7OknmFgf20Ia85TwtmbugU",
+      authDomain: "vyavsaypro-database.firebaseapp.com",
+      projectId: "vyavsaypro-database",
+      storageBucket: "vyavsaypro-database.appspot.com",
+      messagingSenderId: "777188366729",
+      appId: "1:777188366729:web:9dd9636eb57e08ed442958",
+      measurementId: "G-9ZJYBZR4Q8"
+    };
+
+    window.addEventListener('load', async function(ev) {
+      try {
+        // Initialize Flutter
+        await _flutter.loader.load();
+        console.log('Flutter engine initialized successfully');
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        console.log('Firebase initialized successfully');
+      } catch (error) {
+        console.error('Error initializing:', error);
+      }
+    });
+  </script>
+</body>
+</html>
